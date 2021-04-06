@@ -1,4 +1,4 @@
-# FourPV
+# FourPV | [Последняя версия](https://github.com/Zalexanninev15/FourPV/releases/latest)
 
 ![alt](https://github.com/Zalexanninev15/FourPV/raw/main/FourPV.png)
 
