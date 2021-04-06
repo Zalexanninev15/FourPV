@@ -3,6 +3,8 @@
 ![alt](https://github.com/Zalexanninev15/FourPV/raw/main/FourPV.png)
 
 [![](https://img.shields.io/badge/platform-Windows-blue.svg)](https://github.com/Zalexanninev15/FourPV)
+[![](https://img.shields.io/github/v/release/Zalexanninev15/FourPV)](https://github.com/Zalexanninev15/FourPV/releases/latest)
+[![](https://img.shields.io/github/downloads/Zalexanninev15/FourPV/total.svg)](https://github.com/Zalexanninev15/FourPV/releases)
 [![](https://img.shields.io/badge/license-GPLv3-green.svg)](LICENSE)
 
 ## Скриншот
