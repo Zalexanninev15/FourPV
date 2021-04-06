@@ -35,14 +35,14 @@ namespace FourPV
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -104,11 +104,22 @@ namespace FourPV
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label9.Location = new System.Drawing.Point(172, 176);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(84, 15);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Регистрация";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(174, 128);
+            this.label6.Location = new System.Drawing.Point(174, 125);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(140, 15);
             this.label6.TabIndex = 0;
@@ -119,18 +130,28 @@ namespace FourPV
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(176, 71);
+            this.label4.Location = new System.Drawing.Point(172, 71);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(28, 15);
             this.label4.TabIndex = 0;
             this.label4.Text = "Ник";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label8.Location = new System.Drawing.Point(172, 151);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(96, 18);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Регистрация";
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(172, 103);
+            this.label5.Location = new System.Drawing.Point(172, 98);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(160, 18);
             this.label5.TabIndex = 0;
@@ -150,7 +171,7 @@ namespace FourPV
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(176, 45);
+            this.label3.Location = new System.Drawing.Point(172, 44);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(32, 18);
             this.label3.TabIndex = 0;
@@ -165,27 +186,6 @@ namespace FourPV
             this.label2.Size = new System.Drawing.Size(72, 19);
             this.label2.TabIndex = 0;
             this.label2.Text = "Профиль";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(172, 157);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(96, 18);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Регистрация";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(172, 180);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(84, 15);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Регистрация";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Profile
             // 
