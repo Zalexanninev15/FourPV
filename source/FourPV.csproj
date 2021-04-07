@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FourPV.ico" />
+    <None Include="Resources\AvatarNull.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

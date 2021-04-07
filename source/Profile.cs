@@ -685,15 +685,21 @@ namespace FourPV
 {
     public partial class Profile : Form
     {
+        string url; bool IsPhoto = false;
+
         public Profile() { InitializeComponent(); }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            IsPhoto = false; // Проверка на подозрительные строки
+            if (File.Exists(@Application.StartupPath + @"\avatar.dat")) { File.Delete(@Application.StartupPath + @"\avatar.dat"); }
+            if (File.Exists(@Application.StartupPath + @"\profile.dat")) { File.Delete(@Application.StartupPath + @"\profile.dat"); }
             try
             {
                 using (WebClient wc = new WebClient())
                 {
-                    Uri user = new Uri("https://4pda.ru/forum/index.php?showuser=" + textBox1.Text); // Задание URL адреса для дальнейшего взаимодействия
+                    url = "https://4pda.ru/forum/index.php?showuser=" + textBox1.Text; // Добавление профиля для сбора информации и дальнейшего открытия в браузере
+                    Uri user = new Uri(url); // Задание URL адреса для дальнейшего взаимодействия
                     string htmlCode = GetResponse(user.ToString()); // Чтение страницы профиля
                     string username = ParseTitle(htmlCode).Replace(" - 4PDA", "");  // Поиск ника в заголовке страницы профиля
                     wc.DownloadFile(user, @Application.StartupPath + @"\profile.dat"); // Скачивание копии профиля (только код)
@@ -701,7 +707,7 @@ namespace FourPV
                     for (int i = 0; i < profile.Length; i++)
                     {
                         // Поиск аватарки на странице профиля
-                        if (profile[i].Contains("photo")) // Поиск совпадения
+                        if (profile[i].Contains("photo") && (IsPhoto == false)) // Поиск совпадения и проверка на подозрительные строки
                         {
                             string avp;
                             try
@@ -709,15 +715,22 @@ namespace FourPV
                                 avp = Convert.ToString("http:" + profile[i + 1].Replace("			<img src=\"", "").Replace("\" border=\"0\" alt=\"Аватар\" title=\"" + username + "\"/>", "")); // Поиск ссылки на аватарку
                                 wc.DownloadFile(avp, @Application.StartupPath + @"\avatar.dat"); // Скачивание аватарки
                                 pictureBox1.ImageLocation = @Application.StartupPath + @"\avatar.dat"; // Установка автарки на pictureBox
+                                IsPhoto = true; // Проверка на подозрительные строки
                             }
                             catch
                             {
-                                char[] charArray = username.ToCharArray();
-                                username = Convert.ToString(charArray[0]).ToLower() + username.Remove(0, 1); // Если установить аватарку нельзя, то значит первая буква в нике заглавная (по заголовку страницы профиля)
-                                avp = Convert.ToString("http:" + profile[i + 1].Replace("			<img src=\"", "").Replace("\" border=\"0\" alt=\"Аватар\" title=\"" + username + "\"/>", "")); // Поиск ссылки на аватарку
-                                wc.DownloadFile(avp, @Application.StartupPath + @"\avatar.dat"); // Скачивание аватарки
-                                pictureBox1.ImageLocation = @Application.StartupPath + @"\avatar.dat"; // Установка автарки на pictureBox
+                                try
+                                {
+                                    char[] charArray = username.ToCharArray();
+                                    username = Convert.ToString(charArray[0]).ToLower() + username.Remove(0, 1); // Если установить аватарку нельзя, то значит первая буква в нике заглавная (по заголовку страницы профиля)
+                                    avp = Convert.ToString("http:" + profile[i + 1].Replace("			<img src=\"", "").Replace("\" border=\"0\" alt=\"Аватар\" title=\"" + username + "\"/>", "")); // Поиск ссылки на аватарку
+                                    wc.DownloadFile(avp, @Application.StartupPath + @"\avatar.dat"); // Скачивание аватарки
+                                    pictureBox1.ImageLocation = @Application.StartupPath + @"\avatar.dat"; // Установка автарки на pictureBox
+                                    IsPhoto = true; // Проверка на подозрительные строки
+                                }
+                                catch { IsPhoto = false; /* Проверка на подозрительные строки */ }
                             }
+                            if (File.Exists(@Application.StartupPath + @"\avatar.dat") == false) { pictureBox1.Image = Properties.Resources.AvatarNull; }
                         }
                         // Поиск группы пользователя (https://4pda.ru/forum/index.php?act=boardrules)
                         if (profile[i].Contains("Пользователи")) // Поиск совпадения
@@ -785,7 +798,7 @@ namespace FourPV
                             label6.Text = "Супермодераторы"; // Группа пользователя
                             label6.ForeColor = Color.FromArgb(0, 0, 255); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
                         }
-                        if (profile[i].Contains("Администраторы")) // Поиск совпадения
+                        if ((profile[i].Contains("Администраторы")) || (profile[i].Contains("Админы"))) // Поиск совпадения
                         {
                             label6.Text = "Администраторы"; // Группа пользователя
                             label6.ForeColor = Color.FromArgb(255, 0, 0); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
@@ -797,9 +810,10 @@ namespace FourPV
                         }
                     }
                     label4.Text = username; // Показ ника
+                    button2.Visible = true; // Показ кнопки для перехода в профиль в браузере
                 }
             }
-            catch(Exception ex) { MessageBox.Show(ex.ToString()); MessageBox.Show("Данного ID не существует!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch { MessageBox.Show("Данного ID не существует!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private string ParseTitle(string htmlCode)
@@ -835,6 +849,11 @@ namespace FourPV
             }
             while (count > 0);
             return sb.ToString();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try { System.Diagnostics.Process.Start(url); } catch { MessageBox.Show("Браузер по умолчанию не установлен!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
         }
     }
 }
