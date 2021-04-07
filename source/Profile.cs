@@ -773,12 +773,12 @@ namespace FourPV
                             label6.Text = "Кураторы"; // Группа пользователя
                             label6.ForeColor = Color.FromArgb(0, 139, 140); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
                         }
-                        if (profile[i].Contains("Школа модераторов")) // Поиск совпадения
+                        if ((profile[i].Contains("Школа модераторов")) || (profile[i].Contains("Школа Модераторов"))) // Поиск совпадения
                         {
                             label6.Text = "Школа модераторов"; // Группа пользователя
                             label6.ForeColor = Color.FromArgb(79, 153, 255); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
                         }
-                        if (profile[i].Contains("Помощник модератора")) // Поиск совпадения
+                        if ((profile[i].Contains("Помощник модератора")) || (profile[i].Contains("Помощник Модератора"))) // Поиск совпадения
                         {
                             label6.Text = "Помощник модератора"; // Группа пользователя
                             label6.ForeColor = Color.FromArgb(79, 153, 255); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
