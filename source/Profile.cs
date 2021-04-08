@@ -730,7 +730,7 @@ namespace FourPV
                                 }
                                 catch { IsPhoto = false; /* Проверка на подозрительные строки */ }
                             }
-                            if (File.Exists(@Application.StartupPath + @"\avatar.dat") == false) { pictureBox1.Image = Properties.Resources.AvatarNull; }
+                            if (File.Exists(@Application.StartupPath + @"\avatar.dat") == false) { pictureBox1.Image = Properties.Resources.AvatarNull; } // Если у профиля нет аватарки, то используется аватарка по умолчанию (из ресурсов приложения)
                         }
                         // Поиск группы пользователя (https://4pda.ru/forum/index.php?act=boardrules)
                         if (profile[i].Contains("Пользователи")) // Поиск совпадения
