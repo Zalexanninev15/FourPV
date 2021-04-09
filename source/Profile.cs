@@ -813,7 +813,7 @@ namespace FourPV
                     button2.Visible = true; // Показ кнопки для перехода в профиль в браузере
                 }
             }
-            catch { MessageBox.Show("Данного ID не существует!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch { MessageBox.Show("Данного ID не существует!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); } // Если ошибка
         }
 
         private string ParseTitle(string htmlCode)
@@ -853,7 +853,12 @@ namespace FourPV
 
         private void button2_Click(object sender, EventArgs e)
         {
-            try { System.Diagnostics.Process.Start(url); } catch { MessageBox.Show("Браузер по умолчанию не установлен!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+            try { System.Diagnostics.Process.Start(url); } catch { MessageBox.Show("Браузер по умолчанию не установлен!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning); } // Проверка, если браузер не может открыться
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = (!(Char.IsDigit(e.KeyChar)) && !(Char.IsControl(e.KeyChar))); // Вводимые символы - только целые цифры до 9 и Backspace для стирая символов
         }
     }
 }
