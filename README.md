@@ -2,10 +2,12 @@
 
 ![alt](https://github.com/Zalexanninev15/FourPV/raw/main/FourPV.png)
 
-[![](https://img.shields.io/badge/platform-Windows-blue.svg)](https://github.com/Zalexanninev15/FourPV)
+[![](https://img.shields.io/badge/OS-Windows-informational?logo=windows)](https://github.com/Zalexanninev15/FourPV)
 [![](https://img.shields.io/github/v/release/Zalexanninev15/FourPV)](https://github.com/Zalexanninev15/FourPV/releases/latest)
 [![](https://img.shields.io/github/downloads/Zalexanninev15/FourPV/total.svg)](https://github.com/Zalexanninev15/FourPV/releases)
 [![](https://img.shields.io/badge/license-GPLv3-green.svg)](LICENSE)
+[![](https://img.shields.io/badge/donate-QIWI-FF8C00.svg)](https://qiwi.com/n/ZALEXANNINEV15)
+[![](https://img.shields.io/badge/donate-YooMoney-8B3FFD.svg)](https://yoomoney.ru/to/410015106319420)
 
 ## Скриншот
 
