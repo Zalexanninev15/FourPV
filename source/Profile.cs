@@ -805,9 +805,7 @@ namespace FourPV
                         }
                         // Показ даты регистрации
                         if (profile[i].Contains("Регистрация:")) // Поиск совпадения
-                        {
-                            label9.Text = profile[i + 2].Replace("					", ""); // Установка даты регистрации
-                        }
+                        { label9.Text = profile[i + 2].Replace("					", ""); /* Установка даты регистрации */ }
                     }
                     label4.Text = username; // Показ ника
                     button2.Visible = true; // Показ кнопки для перехода в профиль в браузере
@@ -851,14 +849,7 @@ namespace FourPV
             return sb.ToString();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            try { System.Diagnostics.Process.Start(url); } catch { MessageBox.Show("Браузер по умолчанию не установлен!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning); } // Проверка, если браузер не может открыться
-        }
-
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = (!(Char.IsDigit(e.KeyChar)) && !(Char.IsControl(e.KeyChar))); // Вводимые символы - только целые цифры до 9 и Backspace для стирая символов
-        }
+        private void button2_Click(object sender, EventArgs e) { try { System.Diagnostics.Process.Start(url); } catch { MessageBox.Show("Браузер по умолчанию не установлен!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning); } // Проверка, если браузер не может открыться }
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e) { e.Handled = (!(Char.IsDigit(e.KeyChar)) && !(Char.IsControl(e.KeyChar))); /* Вводимые символы - только целые цифры до 9 и Backspace для стирая символов */ }
     }
 }
