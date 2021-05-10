@@ -17,6 +17,10 @@
 
 Пример просмотра информации о пользователе форума и сайта 4PDA с помощью его ID.
 
+## Системные требования
+- **Операционная система:** Windows 7/8/8.1/10
+- **Дополнительно:** Microsoft .NET Framework 4.5
+
 ## Используемые библиотеки
 
 * [Html Agility Pack](https://github.com/zzzprojects/html-agility-pack) ([MIT License](https://github.com/zzzprojects/html-agility-pack/blob/master/LICENSE))
