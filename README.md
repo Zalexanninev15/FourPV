@@ -27,4 +27,4 @@
 
 ## Сборка
 
-Компилируем используя [SharpDevelop](https://sourceforge.net/projects/sharpdevelop/) или Visual Studio. Также необходимо вручную или из NuGet восстановить/установить пакет [*HtmlAgilityPack*](https://www.nuget.org/packages/HtmlAgilityPack) для работоспособности приложения
+Компилируем используя [SharpDevelop](https://sourceforge.net/projects/sharpdevelop) или [Visual Studio](https://visualstudio.microsoft.com/vs). Также необходимо вручную или из NuGet восстановить/установить пакет [*HtmlAgilityPack*](https://www.nuget.org/packages/HtmlAgilityPack) для работоспособности приложения
