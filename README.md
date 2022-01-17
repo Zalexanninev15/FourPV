@@ -3,7 +3,8 @@
 ![alt](https://github.com/Zalexanninev15/FourPV/raw/main/FourPV.png)
 
 [![](https://img.shields.io/badge/OS-Windows-informational?logo=windows)](https://github.com/Zalexanninev15/FourPV)
-[![](https://img.shields.io/badge/.NET-Framework_4.5-4E2ACD.svg)](https://dotnet.microsoft.com/download/dotnet-framework/net45)
+[![](https://img.shields.io/badge/written_on-.NET_Framework_4.5-512BD4.svg?logo=dotnet)](https://dotnet.microsoft.com/download/dotnet-framework/net45)
+[![](https://img.shields.io/badge/written_on-CSharp-239120.svg?logo=csharp)](https://github.com/Zalexanninev15/FourPV)
 [![](https://img.shields.io/github/v/release/Zalexanninev15/FourPV)](https://github.com/Zalexanninev15/FourPV/releases/latest)
 [![](https://img.shields.io/github/downloads/Zalexanninev15/FourPV/total.svg)](https://github.com/Zalexanninev15/FourPV/releases)
 [![](https://img.shields.io/github/last-commit/Zalexanninev15/FourPV)](https://github.com/Zalexanninev15/FourPV/commits/main)
