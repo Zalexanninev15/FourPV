@@ -696,10 +696,10 @@ namespace FourPV
         private void button1_Click(object sender, EventArgs e)
         {
             IsPhoto = false; // Проверка на подозрительные строки
-            if (File.Exists(@Application.StartupPath + @"\avatar.dat")) 
-                File.Delete(@Application.StartupPath + @"\avatar.dat");
-            if (File.Exists(@Application.StartupPath + @"\profile.dat")) 
-                File.Delete(@Application.StartupPath + @"\profile.dat");
+            if (File.Exists("avatar.dat")) 
+                File.Delete("avatar.dat");
+            if (File.Exists("profile.dat")) 
+                File.Delete("profile.dat");
             try
             {
                 using (WebClient wc = new WebClient())
@@ -708,8 +708,8 @@ namespace FourPV
                     Uri user = new Uri(url); // Задание URL адреса для дальнейшего взаимодействия
                     string htmlCode = GetResponse(user.ToString()); // Чтение страницы профиля
                     string username = ParseTitle(htmlCode).Replace(" - 4PDA", "");  // Поиск ника в заголовке страницы профиля
-                    wc.DownloadFile(user, @Application.StartupPath + @"\profile.dat"); // Скачивание копии профиля (только код)
-                    string[] profile = File.ReadAllLines(@Application.StartupPath + @"\profile.dat", Encoding.Default); // Чтение строк кода
+                    wc.DownloadFile(user, "profile.dat"); // Скачивание копии профиля (только код)
+                    string[] profile = File.ReadAllLines("profile.dat", Encoding.Default); // Чтение строк кода
                     for (int i = 0; i < profile.Length; i++)
                     {
                         // Поиск аватарки на странице профиля
@@ -720,8 +720,8 @@ namespace FourPV
                             {
                                 avp = Convert.ToString("http:" + profile[i + 1].Replace("			<img src=\"", "").
                                     Replace("\" border=\"0\" alt=\"Аватар\" title=\"" + username + "\"/>", "")); // Поиск ссылки на аватарку
-                                wc.DownloadFile(avp, @Application.StartupPath + @"\avatar.dat"); // Скачивание аватарки
-                                pictureBox1.ImageLocation = @Application.StartupPath + @"\avatar.dat"; // Установка автарки на pictureBox
+                                wc.DownloadFile(avp, "avatar.dat"); // Скачивание аватарки
+                                pictureBox1.ImageLocation = "avatar.dat"; // Установка автарки на pictureBox
                                 IsPhoto = true; // Проверка на подозрительные строки
                             }
                             catch
@@ -732,13 +732,13 @@ namespace FourPV
                                     username = Convert.ToString(charArray[0]).ToLower() + username.Remove(0, 1); // Если установить аватарку нельзя, то значит первая буква в нике заглавная (по заголовку страницы профиля)
                                     avp = Convert.ToString("http:" + profile[i + 1].Replace("			<img src=\"", "").
                                         Replace("\" border=\"0\" alt=\"Аватар\" title=\"" + username + "\"/>", "")); // Поиск ссылки на аватарку
-                                    wc.DownloadFile(avp, @Application.StartupPath + @"\avatar.dat"); // Скачивание аватарки
-                                    pictureBox1.ImageLocation = @Application.StartupPath + @"\avatar.dat"; // Установка автарки на pictureBox
+                                    wc.DownloadFile(avp, "avatar.dat"); // Скачивание аватарки
+                                    pictureBox1.ImageLocation = "avatar.dat"; // Установка автарки на pictureBox
                                     IsPhoto = true; // Проверка на подозрительные строки
                                 }
                                 catch { IsPhoto = false; /* Проверка на подозрительные строки */ }
                             }
-                            if (File.Exists(@Application.StartupPath + @"\avatar.dat") == false) // Если у профиля нет аватарки, то используется аватарка по умолчанию (из ресурсов приложения)
+                            if (File.Exists("avatar.dat") == false) // Если у профиля нет аватарки, то используется аватарка по умолчанию (из ресурсов приложения)
                                 pictureBox1.Image = Properties.Resources.AvatarNull; 
                         }
                         // Поиск группы пользователя (https://4pda.to/forum/index.php?act=boardrules)
@@ -873,6 +873,14 @@ namespace FourPV
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         { 
             e.Handled = !(char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)); /* Вводимые символы - только целые цифры до 9 и Backspace для стирая символов */ 
+        }
+
+        private void Profile_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (File.Exists("avatar.dat"))
+                File.Delete("avatar.dat");
+            if (File.Exists("profile.dat"))
+                File.Delete("profile.dat");
         }
     }
 }

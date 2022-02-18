@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("FourPV")]
-[assembly: AssemblyCopyright("GNU General Public License v3.0 by Zalexanninev15")]
+[assembly: AssemblyCopyright("GNU General Public License v3 by Zalexanninev15")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

@@ -221,6 +221,7 @@ namespace FourPV
             this.Name = "Profile";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FourPV";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Profile_FormClosed);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
