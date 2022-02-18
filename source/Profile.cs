@@ -673,32 +673,38 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <https://www.gnu.org/licenses/why-not-lgpl.html>. */
 
+using HtmlAgilityPack;
+
 using System;
+using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
-using HtmlAgilityPack;
-using System.Drawing;
 
 namespace FourPV
 {
     public partial class Profile : Form
     {
-        string url; bool IsPhoto = false;
+        private string url; private bool IsPhoto = false;
 
-        public Profile() { InitializeComponent(); }
+        public Profile()
+        { 
+            InitializeComponent();
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
             IsPhoto = false; // Проверка на подозрительные строки
-            if (File.Exists(@Application.StartupPath + @"\avatar.dat")) { File.Delete(@Application.StartupPath + @"\avatar.dat"); }
-            if (File.Exists(@Application.StartupPath + @"\profile.dat")) { File.Delete(@Application.StartupPath + @"\profile.dat"); }
+            if (File.Exists(@Application.StartupPath + @"\avatar.dat")) 
+                File.Delete(@Application.StartupPath + @"\avatar.dat");
+            if (File.Exists(@Application.StartupPath + @"\profile.dat")) 
+                File.Delete(@Application.StartupPath + @"\profile.dat");
             try
             {
                 using (WebClient wc = new WebClient())
                 {
-                    url = "https://4pda.ru/forum/index.php?showuser=" + textBox1.Text; // Добавление профиля для сбора информации и дальнейшего открытия в браузере
+                    url = "https://4pda.to/forum/index.php?showuser=" + textBox1.Text; // Добавление профиля для сбора информации и дальнейшего открытия в браузере
                     Uri user = new Uri(url); // Задание URL адреса для дальнейшего взаимодействия
                     string htmlCode = GetResponse(user.ToString()); // Чтение страницы профиля
                     string username = ParseTitle(htmlCode).Replace(" - 4PDA", "");  // Поиск ника в заголовке страницы профиля
@@ -712,7 +718,8 @@ namespace FourPV
                             string avp;
                             try
                             {
-                                avp = Convert.ToString("http:" + profile[i + 1].Replace("			<img src=\"", "").Replace("\" border=\"0\" alt=\"Аватар\" title=\"" + username + "\"/>", "")); // Поиск ссылки на аватарку
+                                avp = Convert.ToString("http:" + profile[i + 1].Replace("			<img src=\"", "").
+                                    Replace("\" border=\"0\" alt=\"Аватар\" title=\"" + username + "\"/>", "")); // Поиск ссылки на аватарку
                                 wc.DownloadFile(avp, @Application.StartupPath + @"\avatar.dat"); // Скачивание аватарки
                                 pictureBox1.ImageLocation = @Application.StartupPath + @"\avatar.dat"; // Установка автарки на pictureBox
                                 IsPhoto = true; // Проверка на подозрительные строки
@@ -723,85 +730,87 @@ namespace FourPV
                                 {
                                     char[] charArray = username.ToCharArray();
                                     username = Convert.ToString(charArray[0]).ToLower() + username.Remove(0, 1); // Если установить аватарку нельзя, то значит первая буква в нике заглавная (по заголовку страницы профиля)
-                                    avp = Convert.ToString("http:" + profile[i + 1].Replace("			<img src=\"", "").Replace("\" border=\"0\" alt=\"Аватар\" title=\"" + username + "\"/>", "")); // Поиск ссылки на аватарку
+                                    avp = Convert.ToString("http:" + profile[i + 1].Replace("			<img src=\"", "").
+                                        Replace("\" border=\"0\" alt=\"Аватар\" title=\"" + username + "\"/>", "")); // Поиск ссылки на аватарку
                                     wc.DownloadFile(avp, @Application.StartupPath + @"\avatar.dat"); // Скачивание аватарки
                                     pictureBox1.ImageLocation = @Application.StartupPath + @"\avatar.dat"; // Установка автарки на pictureBox
                                     IsPhoto = true; // Проверка на подозрительные строки
                                 }
                                 catch { IsPhoto = false; /* Проверка на подозрительные строки */ }
                             }
-                            if (File.Exists(@Application.StartupPath + @"\avatar.dat") == false) { pictureBox1.Image = Properties.Resources.AvatarNull; } // Если у профиля нет аватарки, то используется аватарка по умолчанию (из ресурсов приложения)
+                            if (File.Exists(@Application.StartupPath + @"\avatar.dat") == false) // Если у профиля нет аватарки, то используется аватарка по умолчанию (из ресурсов приложения)
+                                pictureBox1.Image = Properties.Resources.AvatarNull; 
                         }
-                        // Поиск группы пользователя (https://4pda.ru/forum/index.php?act=boardrules)
+                        // Поиск группы пользователя (https://4pda.to/forum/index.php?act=boardrules)
                         if (profile[i].Contains("Пользователи")) // Поиск совпадения
                         {
                             label6.Text = "Пользователи"; // Группа пользователя
-                            label6.ForeColor = Color.FromArgb(0, 128, 0); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
+                            label6.ForeColor = Color.FromArgb(0, 128, 0); // Установка цвета группы (в соответствии с https://4pda.to/forum/index.php?act=boardrules)
                         }
                         if (profile[i].Contains("Активные пользователи")) // Поиск совпадения
                         {
                             label6.Text = "Активные пользователи"; // Группа пользователя
-                            label6.ForeColor = Color.FromArgb(0, 128, 0); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
+                            label6.ForeColor = Color.FromArgb(0, 128, 0); // Установка цвета группы (в соответствии с https://4pda.to/forum/index.php?act=boardrules)
                         }
                         if (profile[i].Contains("Друзья 4PDA")) // Поиск совпадения
                         {
                             label6.Text = "Друзья 4PDA"; // Группа пользователя
-                            label6.ForeColor = Color.FromArgb(254, 153, 0); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
+                            label6.ForeColor = Color.FromArgb(254, 153, 0); // Установка цвета группы (в соответствии с https://4pda.to/forum/index.php?act=boardrules)
                         }
                         if (profile[i].Contains("Почётные форумчане")) // Поиск совпадения
                         {
                             label6.Text = "Почётные форумчане"; // Группа пользователя
-                            label6.ForeColor = Color.FromArgb(158, 0, 128); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
+                            label6.ForeColor = Color.FromArgb(158, 0, 128); // Установка цвета группы (в соответствии с https://4pda.to/forum/index.php?act=boardrules)
                         }
                         if (profile[i].Contains("FAQMakers")) // Поиск совпадения
                         {
                             label6.Text = "FAQMakers"; // Группа пользователя
-                            label6.ForeColor = Color.FromArgb(137, 205, 50); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
+                            label6.ForeColor = Color.FromArgb(137, 205, 50); // Установка цвета группы (в соответствии с https://4pda.to/forum/index.php?act=boardrules)
                         }
                         if (profile[i].Contains("Участник спецпроекта")) // Поиск совпадения
                         {
                             label6.Text = "Участник спецпроекта"; // Группа пользователя
-                            label6.ForeColor = Color.FromArgb(166, 96, 255); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
+                            label6.ForeColor = Color.FromArgb(166, 96, 255); // Установка цвета группы (в соответствии с https://4pda.to/forum/index.php?act=boardrules)
                         }
                         if (profile[i].Contains("Бизнесмены")) // Поиск совпадения
                         {
                             label6.Text = "Бизнесмены"; // Группа пользователя
-                            label6.ForeColor = Color.FromArgb(177, 0, 191); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
+                            label6.ForeColor = Color.FromArgb(177, 0, 191); // Установка цвета группы (в соответствии с https://4pda.to/forum/index.php?act=boardrules)
                         }
                         if (profile[i].Contains("Кураторы")) // Поиск совпадения
                         {
                             label6.Text = "Кураторы"; // Группа пользователя
-                            label6.ForeColor = Color.FromArgb(0, 139, 140); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
+                            label6.ForeColor = Color.FromArgb(0, 139, 140); // Установка цвета группы (в соответствии с https://4pda.to/forum/index.php?act=boardrules)
                         }
                         if ((profile[i].Contains("Школа модераторов")) || (profile[i].Contains("Школа Модераторов"))) // Поиск совпадения
                         {
                             label6.Text = "Школа модераторов"; // Группа пользователя
-                            label6.ForeColor = Color.FromArgb(79, 153, 255); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
+                            label6.ForeColor = Color.FromArgb(79, 153, 255); // Установка цвета группы (в соответствии с https://4pda.to/forum/index.php?act=boardrules)
                         }
                         if ((profile[i].Contains("Помощник модератора")) || (profile[i].Contains("Помощник Модератора"))) // Поиск совпадения
                         {
                             label6.Text = "Помощник модератора"; // Группа пользователя
-                            label6.ForeColor = Color.FromArgb(79, 153, 255); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
+                            label6.ForeColor = Color.FromArgb(79, 153, 255); // Установка цвета группы (в соответствии с https://4pda.to/forum/index.php?act=boardrules)
                         }
                         if (profile[i].Contains("Модераторы")) // Поиск совпадения
                         {
                             label6.Text = "Модераторы"; // Группа пользователя
-                            label6.ForeColor = Color.FromArgb(79, 153, 255); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
+                            label6.ForeColor = Color.FromArgb(79, 153, 255); // Установка цвета группы (в соответствии с https://4pda.to/forum/index.php?act=boardrules)
                         }
                         if (profile[i].Contains("Роутеры")) // Поиск совпадения
                         {
                             label6.Text = "Роутеры"; // Группа пользователя
-                            label6.ForeColor = Color.FromArgb(34, 34, 34); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
+                            label6.ForeColor = Color.FromArgb(34, 34, 34); // Установка цвета группы (в соответствии с https://4pda.to/forum/index.php?act=boardrules)
                         }
                         if (profile[i].Contains("Супермодераторы")) // Поиск совпадения
                         {
                             label6.Text = "Супермодераторы"; // Группа пользователя
-                            label6.ForeColor = Color.FromArgb(0, 0, 255); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
+                            label6.ForeColor = Color.FromArgb(0, 0, 255); // Установка цвета группы (в соответствии с https://4pda.to/forum/index.php?act=boardrules)
                         }
-                        if ((profile[i].Contains("Администраторы")) || (profile[i].Contains("Админы"))) // Поиск совпадения
+                        if (profile[i].Contains("Администраторы") || profile[i].Contains("Админы")) // Поиск совпадения
                         {
                             label6.Text = "Администраторы"; // Группа пользователя
-                            label6.ForeColor = Color.FromArgb(255, 0, 0); // Установка цвета группы (в соответствии с https://4pda.ru/forum/index.php?act=boardrules)
+                            label6.ForeColor = Color.FromArgb(255, 0, 0); // Установка цвета группы (в соответствии с https://4pda.to/forum/index.php?act=boardrules)
                         }
                         // Показ даты регистрации
                         if (profile[i].Contains("Регистрация:")) // Поиск совпадения
@@ -811,7 +820,10 @@ namespace FourPV
                     button2.Visible = true; // Показ кнопки для перехода в профиль в браузере
                 }
             }
-            catch { MessageBox.Show("Данного ID не существует!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); } // Если ошибка
+            catch(Exception ex) { 
+                MessageBox.Show($"Данного ID не существует!\n" +
+                    $"{ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } // Если ошибка
         }
 
         private string ParseTitle(string htmlCode)
@@ -827,8 +839,10 @@ namespace FourPV
         {
             foreach (var curNode in node.ChildNodes)
             {
-                if (curNode.Name.Equals("title", StringComparison.CurrentCultureIgnoreCase)) { result = curNode; }
-                else { SearchNode(curNode, ref result); }
+                if (curNode.Name.Equals("title", StringComparison.CurrentCultureIgnoreCase))
+                    result = curNode;
+                else
+                    SearchNode(curNode, ref result);
             }
         }
 
@@ -843,13 +857,22 @@ namespace FourPV
             do
             {
                 count = resStream.Read(buf, 0, buf.Length);
-                if (count != 0) { sb.Append(Encoding.Default.GetString(buf, 0, count)); }
+                if (count != 0)
+                    sb.Append(Encoding.Default.GetString(buf, 0, count));
             }
             while (count > 0);
             return sb.ToString();
         }
 
-        private void button2_Click(object sender, EventArgs e) { try { System.Diagnostics.Process.Start(url); } catch { MessageBox.Show("Браузер по умолчанию не установлен!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning); } // Проверка, если браузер не может открыться }
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e) { e.Handled = (!(Char.IsDigit(e.KeyChar)) && !(Char.IsControl(e.KeyChar))); /* Вводимые символы - только целые цифры до 9 и Backspace для стирая символов */ }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try { System.Diagnostics.Process.Start(url); } 
+            catch { MessageBox.Show("Браузер по умолчанию не установлен!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning); } /* Проверка, если браузер не может открыться */
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        { 
+            e.Handled = !(char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)); /* Вводимые символы - только целые цифры до 9 и Backspace для стирая символов */ 
+        }
     }
 }
