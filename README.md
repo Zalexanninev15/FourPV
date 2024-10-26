@@ -2,14 +2,14 @@
 
 ![alt](https://github.com/Zalexanninev15/FourPV/raw/main/FourPV.png)
 
-[![](https://img.shields.io/badge/OS-Windows-informational?logo=windows)](https://github.com/Zalexanninev15/FourPV)
+[![](https://img.shields.io/badge/OS-Windows-informational)](https://github.com/Zalexanninev15/FourPV)
 [![](https://img.shields.io/badge/written_on-.NET_Framework_4.5-512BD4.svg?logo=dotnet)](https://dotnet.microsoft.com/download/dotnet-framework/net45)
 [![](https://img.shields.io/badge/written_on-CSharp-239120.svg?logo=csharp)](https://github.com/Zalexanninev15/FourPV)
 [![](https://img.shields.io/github/v/release/Zalexanninev15/FourPV)](https://github.com/Zalexanninev15/FourPV/releases/latest)
 [![](https://img.shields.io/github/downloads/Zalexanninev15/FourPV/total.svg)](https://github.com/Zalexanninev15/FourPV/releases)
 [![](https://img.shields.io/github/last-commit/Zalexanninev15/FourPV)](https://github.com/Zalexanninev15/FourPV/commits/main)
 [![](https://img.shields.io/badge/license-GPLv3-ligthgreen.svg)](LICENSE)
-[![](https://img.shields.io/badge/donate-Buy_Me_a_Coffee-F94400.svg)](https://zalexanninev15.jimdofree.com/buy-me-a-coffee)
+[![](https://img.shields.io/badge/Donate-FFDD00.svg?logo=buymeacoffee&logoColor=black)](https://z15.neocities.org/donate)
 
 ## Скриншот
 
